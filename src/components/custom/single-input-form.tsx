@@ -30,7 +30,13 @@ export function InputForm() {
     },
   });
 
-  function onSubmit() {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    await fetch(`${import.meta.env.VITE_STRAPI_URL}/api/books`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: { Title: data.title } }),
+    });
+    form.reset();
     toast("Form submitted");
   }
 
