@@ -23,7 +23,7 @@ function App() {
     <div className="flex flex-col items-center gap-12 mt-20">
       <h1>📚 Books from strapi</h1>
       <h2>Add another one:</h2>
-      <InputForm />
+      <InputForm {...{ setBooks }} />
       <h2 className="mt-6">Books already read:</h2>
       <ul>
         {books.map((book) => (
