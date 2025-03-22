@@ -6,3 +6,14 @@ export type Book = {
   publishedAt: Date;
   updatedAt: Date;
 };
+
+export type BookCategory = {
+  Name: string;
+  books: Book[];
+  createdAt: Date;
+  documentId: string;
+  id: number;
+  publishedAt: Date;
+  slug: string
+  updatedAt: Date;
+};

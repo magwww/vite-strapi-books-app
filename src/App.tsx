@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import { Book } from "./types";
-import { InputForm } from "./components/custom/single-input-form";
+import { BookForm } from "./components/custom/book-form";
+import { useBookCategories } from "./hooks/useBookCategories";
 
 function App() {
-  const [books, setBooks] = useState<Book[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_STRAPI_URL}/api/books`
-      );
-
-      const { data } = await response.json();
-      setBooks(data);
-    };
-
-    getData();
-  }, []);
+  const { bookCategories, addBook } = useBookCategories();
 
   return (
     <div className="flex flex-col items-center gap-12 mt-20">
       <h1>📚 Books from strapi</h1>
       <h2>Add another one:</h2>
-      <InputForm {...{ setBooks }} />
-      <h2 className="mt-6">Books already read:</h2>
-      <ul>
-        {books.map((book) => (
-          <li key={book.Title}>"{book.Title}"</li>
+      <BookForm onSubmit={addBook} />
+      <div className="flex gap-20">
+        {bookCategories.map((category) => (
+          <ul key={category.id}>
+            <h2 className="mb-4 underline">{category.Name}</h2>
+            {category.books.map((book) => (
+              <li key={book.Title} className="text-left list-disc">
+                "{book.Title}"
+              </li>
+            ))}
+          </ul>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
