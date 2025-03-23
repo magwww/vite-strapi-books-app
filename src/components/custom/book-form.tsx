@@ -38,7 +38,7 @@ export function BookForm({ onSubmit }: BookFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => onSubmit(data, form.reset))}
-        className="w-2/3 space-y-6"
+        className="w-2/3 space-y-8 mb-10"
       >
         <FormField
           control={form.control}
@@ -73,7 +73,9 @@ export function BookForm({ onSubmit }: BookFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );

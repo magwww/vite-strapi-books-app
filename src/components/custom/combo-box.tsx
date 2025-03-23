@@ -41,7 +41,7 @@ export function Combobox({
           variant="outline"
           role="combobox"
           className={cn(
-            "w-[200px] justify-between",
+            "justify-between",
             !field.value && "text-muted-foreground"
           )}
         >

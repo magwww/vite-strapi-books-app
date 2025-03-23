@@ -10,7 +10,7 @@ function App() {
       <h1>📚 Books from strapi</h1>
       <h2>Add another one:</h2>
       <BookForm onSubmit={addBook} />
-      <div className="flex gap-20">
+      <div className="flex gap-10 lg:gap-20 flex-col lg:flex-row">
         {bookCategories.map((category) => (
           <ul key={category.id}>
             <h2 className="mb-4 underline">{category.Name}</h2>
