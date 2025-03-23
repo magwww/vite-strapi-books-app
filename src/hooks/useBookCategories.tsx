@@ -39,15 +39,15 @@ export function useBookCategories() {
       if (!categoryData.data.length)
         throw new Error(`Category with slug "${categorySlug}" not found.`);
 
-      const categoryId = categoryData.data[0].id;
+      const categoryDocumentId = categoryData.data[0].documentId;
 
       const bookRes = await fetch(
-        `${import.meta.env.VITE_STRAPI_URL}/api/books`,
+        `${import.meta.env.VITE_STRAPI_URL}/api/books?populate=*`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            data: { Title: title, book_category: categoryId },
+            data: { Title: title, book_category: categoryDocumentId },
           }),
         }
       );
@@ -58,7 +58,7 @@ export function useBookCategories() {
 
       setBookCategories((prevCategories) =>
         prevCategories.map((category) =>
-          category.id === categoryId
+          category.documentId === categoryDocumentId
             ? { ...category, books: [...category.books, newBook.data] }
             : category
         )
