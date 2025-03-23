@@ -11,7 +11,9 @@ export function useBookCategories() {
   async function fetchCategories() {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_STRAPI_URL}/api/book-categories?populate=books`
+        `${
+          import.meta.env.VITE_STRAPI_URL
+        }/api/book-categories?populate=books&sort=createdAt:asc`
       );
       if (!response.ok) throw new Error("Failed to fetch categories");
 
